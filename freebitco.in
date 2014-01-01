@@ -1,0 +1,36 @@
+var i = 0;
+
+function callfun(i) {
+    if (i < 300) {
+        doa();
+    }
+}
+
+function doa() {
+    if (Math.ceil(Math.random() * 100) % 2 == 0) {
+        $.get("http://freebitco.in/", {
+            op: "double_your_btc",
+            m: "lo",
+            jackpot: 0,
+            stake: "0.00000001",
+            multiplier: 100
+        }).done(function (data ) {
+            console.log("lo"+data);
+            i++;
+            callfun(i);
+        });
+    } else {
+        $.get("http://freebitco.in/", {
+            op: "double_your_btc",
+            m: "hi",
+            jackpot: 0,
+            stake: "0.00000001",
+            multiplier: 100
+        }).done(function (data ) {
+            console.log("hi"+data);
+            i++;
+            callfun(i);
+        });
+    }
+}
+callfun(i);
