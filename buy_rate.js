@@ -1,4 +1,4 @@
-//cofing start
+// config start
 // buy
 type = 'buy';
 amount = 5078.71;
