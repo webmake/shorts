@@ -1,14 +1,16 @@
+//cofing start
 // buy
 type = 'buy';
+amount = 5078.71;
+reach = '0.00244388';
+price = 0.00000048;
+// config end
 percent = 0.0025;
 if ('buy' == type) {
     percent += 1;
 } else {
     percent = 1 - percent;
 }
-amount = 5078.71;
-reach = '0.00244388';
-price = 0.00000048;
 counter = 0;
 status = 0;
 while (1) {
