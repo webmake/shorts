@@ -32,3 +32,224 @@ print s
 
 
 https://0x90r00t.com/2015/11/30/9447-ctf-2015-web-200-nicklesndimes/
+
+
+
+<?php
+
+function p($input, $g)
+{
+    $search = '';
+    $i = 0;
+    while (true) {
+        $search .= $g[$i++];
+        if (strpos($input, $search) === false) {
+            $i--;
+            break;
+        }
+    }
+    return substr($input, $i) . substr($input, 0, $i);
+}
+
+function at($f, $t, $g)
+{
+    $len = strlen($f);
+    $map = [];
+    for ($i = 0; $i < $len; $i++) {
+        $map[$f[$i]] = $t[$i];
+    }
+    $len = strlen($g);
+    $new = '';
+    for ($i = 0; $i < $len; $i++) {
+        $new .= $map[$g[$i]];
+    }
+    return $new;
+}
+
+function k($f, $t, $g)
+{
+    $len = strlen($f);
+    $map = [];
+    for ($i = 0; $i < $len; $i++) {
+        $map[$t[$i]] = $f[$i];
+    }
+    $len = strlen($g);
+    $new = '';
+    for ($i = 0; $i < $len; $i++) {
+        $new .= $map[$g[$i]];
+    }
+    return $new;
+}
+
+
+function pe($in, $out)
+{
+    $map = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a' => 10, 'b' => 11, 'c' => 12, 'd' => 13, 'e' => 14, 'f' => 15];
+    $len = strlen($out);
+    $pr = '';
+    for ($i = 0; $i < $len; $i++) {
+        $skirtumas = $map[$in[$i]] - $map[$out[$i]];
+        if ($skirtumas < 0) {
+            $index = $map[$in[$i]] + $skirtumas + 16;
+        } else {
+            $index = $map[$in[$i]] + $skirtumas;
+        }
+        if ($index >= 16) {
+            $index -= 16;
+        }
+        $pr .= array_search($index, $map);
+    }
+    return $pr;
+}
+
+function sp($in, $out = 'this is last symbol related')
+{
+    $map = [
+        '011',
+        '123',
+        '145',
+        '167',
+        '189',
+        '1ab',
+        '1cd',
+        '1ef',
+        '022',
+        '246',
+        '257',
+        '28a',
+        '29b',
+        '2ce',
+        '2df',
+        '033',
+        '347',
+        '356',
+        '38b',
+        '39a',
+        '3cf',
+        '3de',
+        '044',
+        '48c',
+        '49d',
+        '4ae',
+        '4bf',
+        '055',
+        '58d',
+        '59c',
+        '5af',
+        '5be',
+        '066',
+        '68e',
+        '69f',
+        '6ac',
+        '6bd',
+        '077',
+        '78f',
+        '79e',
+        '7ad',
+        '7bc',
+        '088',
+        '099',
+        '0aa',
+        '0bb',
+        '0cc',
+        '0dd',
+        '0ee',
+        '0ff',
+    ];
+    $len = strlen($in);
+    $words = [];
+    for ($i = 1; $i < $len; $i++) {
+        $triad = $triad2 = [];
+        $duel = $duel2 = [];
+        foreach ($map as $el) {
+            if (strpos($el, $in[$i]) !== false) {
+                $triad[] = $el;
+                $d = preg_replace('/' . $in[$i] . '/', '', $el, 1);
+                $duel[$d] = $d;
+                $duel[$d[1] . $d[0]] = $d[1] . $d[0];
+            }
+        }
+        $triads[] = $triad;
+        $new_part = $duel;
+        if ($i > 1) {
+            $duel = [];
+            foreach ($words as $indexw => $word) {
+                foreach ($new_part as $key => $d) {
+                    if ($word[$i - 1] === $d[0]) {
+                        $key1 = $words[$indexw] . $d[1];
+                        $duel[$key1] = $key1;
+                    }
+                }
+            }
+        }
+        $words = $duel;
+    }
+    return $words;
+}
+
+?>
+    <form action="" method="post">
+        <input type="radio" name="set" value="1" checked>pirmas <br>
+        <input type="radio" name="set" value="2">antras 1234567890abcdef<br>
+        <input type="radio" name="set" value="3">trecias 1234567890abcdef<br>
+        <input type="radio" name="set" value="4">ketvirtas 1234567890abcdef<br>
+        <input type="radio" name="set" value="5">penktas <br>
+        <input type="radio" name="set" value="6">sestas <br>
+        <input type="radio" name="set" value="7">septintas <br>
+        <input type="radio" name="set" value="8">astuntas <br>
+        <input type="radio" name="set" value="9">devintas <br>
+        <input type="radio" name="set" value="10">desimtas<br>
+        <input type="text" name="in"> in<br>
+        <input type="text" name="out"> out<br>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+<?php
+
+if (isset($_POST['submit'])) {
+    switch ($_POST['set']):
+        case 1:
+            $in = isset($_POST['in']) ? $_POST['in'] : '9df32fe683cae3de247ddf7514824d3c';
+            $out = isset($_POST['out']) ? $_POST['out'] : 'de247ddf7514824d3c9df32fe683cae3';
+            echo p($in, $out);
+            break;
+        case 2:
+            $g2 = isset($_POST['in']) ? $_POST['in'] : '875afc64cb369de94357fa42c91c2cdc';
+            $t = isset($_POST['out']) ? $_POST['out'] : 'fcdab8967e452301';
+            echo at('1234567890abcdef', $t, $g2);
+            break;
+        case 3:
+            $g1 = isset($_POST['in']) ? $_POST['in'] : '875afc64cb369de94357fa42c91c2cdc';
+            $t1 = isset($_POST['out']) ? $_POST['out'] : 'fcdab8967e452301';
+            echo at('1234567890abcdef', $t1, $g1);
+            break;
+        case 4:
+            $t2 = isset($_POST['out']) ? $_POST['out'] : '9abcdef018234567';
+            $g3 = isset($_POST['in']) ? $_POST['in'] : 'd37299a4b7bca8ffadec503e84580c55';
+            echo k('1234567890abcdef', $t2, $g3);
+            break;
+        case 5:
+            $in1 = isset($_POST['in']) ? $_POST['in'] : '4dbb720365ca61a69889d76dc068e68e';
+            $out = isset($_POST['out']) ? $_POST['out'] : '05fb3a432d0a29e650c99fad88a8aece';
+            echo pe($in1, $out);
+            break;
+        case 6:
+            $in = isset($_POST['in']) ? $_POST['in'] : '4dbb720365ca61a69889d76dc068e68e';
+            $out1 = isset($_POST['out']) ? $_POST['out'] : '05fb3a432d0a29e650c99fad88a8aece';
+            echo pe($in, $out1);
+            break;
+        case 7:
+            $in = isset($_POST['in']) ? $_POST['in'] : '4dbb720365ca61a69889d76dc068e68e';
+            $out1 = isset($_POST['out']) ? $_POST['out'] : '05fb3a432d0a29e650c99fad88a8aece';
+            echo "<pre>";
+            print_r(sp($in, $out1));
+            break;
+        case 8:
+            break;
+        case 9:
+            break;
+        case 10:
+            break;
+        default:
+            echo 'none';
+    endswitch;
+}
